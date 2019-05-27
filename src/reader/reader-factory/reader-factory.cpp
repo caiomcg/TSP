@@ -19,7 +19,7 @@ std::unique_ptr<Reader> ReaderFactory::createReader(const std::string& file_path
         getline(file, line);
     }
 
-    if (line == "EDGE_WEIGHT_SECTION") return std::make_unique<EdgeWeightReader>(file_path);
+    if (line == "EDGE_WEIGHT_SECTION")  return std::make_unique<EdgeWeightReader>(file_path);
     if (line == "DISPLAY_DATA_SECTION") return std::make_unique<DisplayDataReader>(file_path);
 
     throw std::runtime_error("invalid data type");
