@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
         reader->prepare();
         reader->process();
 
-        showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        // showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
 
     } catch (const std::exception& e) {
         std::clog << "Failed - what(): " << e.what() << std::endl;

@@ -9,7 +9,8 @@
 class DisplayDataReader final : public Reader {
 private:
     std::ifstream file_stream_;
-    uint8_t** adjacency_matrix_;
+
+    unsigned distanceBetweenNodes(const std::pair<double, double>& begin, const std::pair<double, double>& end);
 public:
     DisplayDataReader(const std::string& file_path);
     ~DisplayDataReader();
