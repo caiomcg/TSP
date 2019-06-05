@@ -26,7 +26,7 @@ BUILDLIST := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(INCDIRS))
 # Shared Compiler Flags
 CFLAGS := -std=c++14 -O3 -Wall -Wextra
 INC := $(INCLIST) -I /usr/local/include
-LIB := -lm -lrt
+LIB := -lm
 
 ifeq ($(debug), 1)
 CFLAGS += -g -ggdb3 -D DEBUG

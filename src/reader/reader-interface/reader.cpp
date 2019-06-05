@@ -2,11 +2,15 @@
 
 Reader::Reader(const std::string file_path) : file_path_{file_path}, 
     dimension_regex_{R"((DIMENSION):\ (\d+))"}, name_regex_{R"((NAME): (.+))"},
-    adjacency_matrix_{nullptr}, dimension_{-1} {}
+    adjacency_matrix_{nullptr}, adjacency_list_{nullptr}, dimension_{-1} {}
 
 Reader::~Reader() {
     if (this->adjacency_matrix_ != nullptr) {
         delete[] this->adjacency_matrix_;
+    }
+
+    if (this->adjacency_list_ != nullptr) {
+        delete this->adjacency_list_;
     }
 }
 
@@ -40,4 +44,8 @@ unsigned* Reader::getAdjacencyMatrix() {
 
 int Reader::getAdjacencyMatrixSize() {
     return this->dimension_;
+}
+
+AdjacencyList* Reader::getAdjacencyList() {
+    return this->adjacency_list_;
 }

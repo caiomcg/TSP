@@ -5,6 +5,8 @@
 #include <fstream>
 #include <regex>
 
+#include "../../graph-structs/adjacency-list/adjacency-list.h"
+
 class Reader {
 protected:
     std::string file_path_;
@@ -12,6 +14,7 @@ protected:
     std::regex  name_regex_;
 
     unsigned* adjacency_matrix_;
+    AdjacencyList* adjacency_list_;
     
     int dimension_;
 
@@ -23,6 +26,8 @@ public:
     
     unsigned* getAdjacencyMatrix();
     int getAdjacencyMatrixSize();
+
+    AdjacencyList* getAdjacencyList();
 
     virtual void prepare() noexcept(false) = 0;
     virtual void process() = 0;

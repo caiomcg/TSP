@@ -26,11 +26,17 @@ void EdgeWeightReader::process() {
         throw std::runtime_error("could not allocate the memory space");
     }
 
+    this->adjacency_list_ = new AdjacencyList{this->dimension_};
+
      std::clog << "allocated" << std::endl;
 
     for (int i = 0; i < this->dimension_; i++) {
         for (int j = 0; j < this->dimension_; j++) {
             this->file_stream_ >> this->adjacency_matrix_[i * this->dimension_ + j];
+
+            if (this->adjacency_matrix_[i * this->dimension_ + j]) {
+                this->adjacency_list_->addNeighbour(i, j, this->adjacency_matrix_[i * this->dimension_ + j]);
+            }
         }
     }
 }

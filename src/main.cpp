@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
         reader->process();
 
         // showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        reader->getAdjacencyList()->show();
 
     } catch (const std::exception& e) {
         std::clog << "Failed - what(): " << e.what() << std::endl;

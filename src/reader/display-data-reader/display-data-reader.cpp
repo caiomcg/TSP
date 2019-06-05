@@ -39,6 +39,8 @@ void DisplayDataReader::process() {
         throw std::runtime_error("could not allocate the memory space");
     }
 
+    this->adjacency_list_ = new AdjacencyList{this->dimension_};
+
     std::string line;
     std::smatch matches;
     std::vector<std::pair<double, double>> points;
@@ -55,10 +57,15 @@ void DisplayDataReader::process() {
 
     for (int i = 0; i < this->dimension_; i++) {
         for (int j = i + 1; j < this->dimension_; j++) {
-            this->adjacency_matrix_[i * this->dimension_ + j] = this->adjacency_matrix_[j * this->dimension_ + i] = this->distanceBetweenNodes(
+            unsigned distance = this->distanceBetweenNodes(
                 points[i],
                 points[j]
             );
+            this->adjacency_matrix_[i * this->dimension_ + j] = this->adjacency_matrix_[j * this->dimension_ + i] = distance;
+
+            if (distance) {
+                this->adjacency_list_->addNeighbour(i, j, distance);
+            }
         }
     }
 }
