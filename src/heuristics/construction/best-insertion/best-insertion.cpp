@@ -21,7 +21,7 @@ int* BestInsertion::getSolution(const unsigned& origin) {
     int count = 1;
 
     for (unsigned i = 0; i < adjacency_list_->getNeighbourSize(0); i++) {
-        auto neighbour = adjacency_list_->getNeighbour(0, i + 1);
+        auto neighbour = adjacency_list_->getNeighbour(0, i);
         if (!processed[neighbour.vertice] && neighbour.weight < min_vertice_weight) {
             min_vertice_weight = neighbour.weight;
             vertice = neighbour.vertice;
@@ -41,7 +41,7 @@ int* BestInsertion::getSolution(const unsigned& origin) {
 
     for (int j = 0; j < 2; j++) {
         for (unsigned i = 0; i < adjacency_list_->getNeighbourSize(0); i++) {
-            matrix[j][adjacency_list_->getNeighbour(j, i + 1).vertice] = adjacency_list_->getNeighbour(j, i + 1).weight;
+            matrix[j][adjacency_list_->getNeighbour(j, i).vertice] = adjacency_list_->getNeighbour(j, i).weight;
         }
     }
 
@@ -57,7 +57,9 @@ int* BestInsertion::getSolution(const unsigned& origin) {
     solution[count++] = vertice;
 
     for (int i = count; i < matrix_size_; i++) {
-        int a, b;
+        int a = 0;
+        int b = 0;
+        
         vertice = -1;
         min_vertice_weight = std::numeric_limits<int>::max();
         for (int j = 1; j < matrix_size_; j++) {

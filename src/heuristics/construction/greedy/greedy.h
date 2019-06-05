@@ -7,11 +7,11 @@
 
 #include "../../../graph-structs/adjacency-list/adjacency-list.h"
 
-typedef std::priority_queue<neighbour, std::vector<neighbour>, std::greater<neighbour> > PriorityQueue;
+typedef std::priority_queue<neighbour, std::vector<neighbour>, std::greater<neighbour> > MIN_HEAP;
 
 class Greedy final : public Construction {
 private:
-    PriorityQueue priority_queue_;
+    MIN_HEAP min_heap;
 public:
     Greedy(unsigned* adjacency_matrix, const int& matrix_size, AdjacencyList* adjacency_list);
     ~Greedy();

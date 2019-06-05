@@ -32,7 +32,7 @@ void AdjacencyList::show() const {
 }
 
 neighbour AdjacencyList::getNeighbour(const unsigned& origin, const unsigned& destination) {
-    return this->list_[origin][destination - 1];
+    return this->list_[origin][destination];
 }
 
 unsigned AdjacencyList::getNeighbourSize(const unsigned& origin) {

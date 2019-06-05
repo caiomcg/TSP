@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
         reader->getAdjacencyList()->show();
 #endif
     
-        auto construction_heuristic = BestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
         int* solution = construction_heuristic.getSolution(0);
 
         std::clog << "Evaluation: " << evaluation(reader->getAdjacencyMatrix(), solution, reader->getAdjacencyMatrixSize()) << std::endl;

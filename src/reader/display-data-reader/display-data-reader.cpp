@@ -65,6 +65,7 @@ void DisplayDataReader::process() {
 
             if (distance) {
                 this->adjacency_list_->addNeighbour(i, j, distance);
+                this->adjacency_list_->addNeighbour(j, i, distance);
             }
         }
     }

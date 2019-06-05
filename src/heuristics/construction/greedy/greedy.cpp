@@ -8,53 +8,51 @@ Greedy::~Greedy() {}
 #include <iostream>
 
 int* Greedy::getSolution(const unsigned& origin) {
-    std::vector<int> C(matrix_size_);
+    int* solution   = new int [matrix_size_]();
+    bool* visited = new bool[matrix_size_]();
+    
+    std::vector<int> nodes(matrix_size_);
 
-    for (unsigned i = 0; i < C.size(); i++) {
-        C[i] = i;
+    unsigned solution_pos = 0;
+
+    for (unsigned i = 0; i < nodes.size(); i++) {
+        nodes[i] = i;
     }
-    
-    bool* processed = new bool[matrix_size_]();
-    int* solution = new int[matrix_size_]();
-    
-    int current_vertex = -1;
-    unsigned count = 0;
 
-    priority_queue_.push({ origin, 0 }); // Start from the origin, which costs 0;
+    min_heap.push({ origin, 0 }); // Start from the origin, which costs 0;
 
-    // std::clog << "Size: " << matrix_size_ << std::endl;
-    // std::clog << "Processed: " << processed[0] << std::endl;
-    // std::clog << "solution: " << solution[0] << std::endl;
+    do {
+        int current_vertex = -1;
+        
+        // If we have an element on the min heap
+        while (!min_heap.empty()) {
+            int vertex = min_heap.top().vertice; // Get the vertice where the smallest element represents
+            min_heap.pop(); // Remove the smallest
 
-    while (true) {
-        current_vertex = -1;
-        while (!priority_queue_.empty()) {
-            int vertex = priority_queue_.top().vertice;
-            priority_queue_.pop();
-
-            if (!processed[vertex]) {
-                processed[vertex] = true;
+            if (!visited[vertex]) { // If we have not visited
+                
+                // Set as visited and add the vertice as the next part of the solution
+                visited[vertex] = true;
                 current_vertex = vertex;
-                solution[count++] = vertex;
+                solution[solution_pos++] = vertex;
 
-                for (unsigned i = 0; i < C.size(); i++) {
-                    if (C[i] == current_vertex) C.erase(C.begin() + i);
+                // Remove the element from the nodes list
+                for (unsigned i = 0; i < nodes.size(); i++) {
+                    if (nodes[i] == current_vertex) nodes.erase(nodes.begin() + i);
                 }
                     
-                while(!priority_queue_.empty()) priority_queue_.pop();
+                // Remove all elements from the queue as we will look only in the level of the current_vertex
+                while(!min_heap.empty()) min_heap.pop();
                 break;
             }
         }
 
-        if (current_vertex == -1) break;
-
-        for (unsigned i = 0; i < C.size(); i++) {
-        //     std::clog << current_vertex << " " << C[i] << std::endl;
-        //     std::clog << "Will add: {" << C[i] << ", " << adjacency_list_->getWeight(current_vertex, C[i]) << " }" << std::endl;
-            priority_queue_.push({ C[i], adjacency_list_->getNeighbour(current_vertex, C[i]).weight });
+        // Copy all connections between the current_vertex and the other nodes
+        for (unsigned i = 0; i < nodes.size(); i++) {
+            min_heap.push({ (unsigned)nodes[i], adjacency_list_->getNeighbour(current_vertex, nodes[i] - 1).weight });
         }
-    }
+    } while (nodes.size());
 
-    delete[] processed;
+    delete[] visited;
     return solution;
 }
