@@ -39,7 +39,6 @@ int main(int argc, char** argv) {
         reader->getAdjacencyList()->show();
 #endif
 
-
         auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
         int* solution = construction_heuristic.getSolution(0);
 
@@ -57,11 +56,6 @@ int main(int argc, char** argv) {
         auto movement_heuristic = TwoOpt(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
         auto new_eval = movement_heuristic.getNewMovement(solution, construction_evaluation);
         std::clog << "New Evaluation: " << new_eval << std::endl;
-
-        std::clog << "New Sequence: ";
-        for (int i = 0; i < reader->getAdjacencyMatrixSize(); i++)
-            std::clog << solution[i] << " ";
-        std::clog << std::endl;
 
         delete[] solution;
     } catch (const std::exception& e) {

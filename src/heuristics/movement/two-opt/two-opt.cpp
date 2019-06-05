@@ -35,8 +35,12 @@ int TwoOpt::getNewMovement(int* solution, int evaluation) {
         improved = false;
         for (int i = 1; i < size_ - 2; i++) {
             for (int j = i + 1; j < size_ - 1; j++) {
-                if (adjacency_matrix_[i * size_ + (i - 1)] + adjacency_matrix_[(j + 1) * size_ + j] >= 
-                    adjacency_matrix_[i * size_ + (j + 1)] + adjacency_matrix_[(i - 1) * size_ + j]) {
+                // std::clog << "[" << solution[i] << "][" << solution[i - 1] << "] " << adjacency_matrix_[solution[i] * size_ + solution[(i - 1)]] <<  std::endl;
+                // std::clog << "[" << solution[j] << "][" << solution[j + 1] << "] " << adjacency_matrix_[solution[j] * size_ + solution[(j + 1)]] << std::endl;
+                // std::clog << "[" << solution[i] << "][" << solution[j + 1] << "] " << adjacency_matrix_[solution[i] * size_ + solution[(j + 1)]] << std::endl;
+                // std::clog << "[" << solution[j] << "][" << solution[i - 1] << "] " << adjacency_matrix_[solution[j] * size_ + solution[(i - 1)]] << std::endl;
+                if (adjacency_matrix_[solution[i] * size_ + solution[(i - 1)]] + adjacency_matrix_[solution[j] * size_ + solution[(j + 1)]] >= 
+                    adjacency_matrix_[solution[i] * size_ + solution[(j + 1)]] + adjacency_matrix_[solution[j] * size_ + solution[(i - 1)]]) {
                     
                     int* new_solution = swap(solution, i, j, size_);
 
@@ -54,6 +58,11 @@ int TwoOpt::getNewMovement(int* solution, int evaluation) {
             }
         }
     }
+
+    std::clog << "New Sequence: ";
+    for (int k = 0; k < size_; k++)
+        std::clog << solution[k] << " ";
+    std::clog << std::endl;
 
     return evaluation;
 }
