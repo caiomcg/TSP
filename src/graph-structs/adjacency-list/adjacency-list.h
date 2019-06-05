@@ -35,7 +35,8 @@ public:
 
     void show() const;
 
-    int getWeight(const unsigned& origin, const unsigned& destination);
+    neighbour getNeighbour(const unsigned& origin, const unsigned& destination);
+    unsigned getNeighbourSize(const unsigned& origin);
     unsigned getVertices() const;
 };
 

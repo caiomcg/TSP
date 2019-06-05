@@ -51,9 +51,10 @@ int* Greedy::getSolution(const unsigned& origin) {
         for (unsigned i = 0; i < C.size(); i++) {
         //     std::clog << current_vertex << " " << C[i] << std::endl;
         //     std::clog << "Will add: {" << C[i] << ", " << adjacency_list_->getWeight(current_vertex, C[i]) << " }" << std::endl;
-            priority_queue_.push({ C[i], adjacency_list_->getWeight(current_vertex, C[i]) });
+            priority_queue_.push({ C[i], adjacency_list_->getNeighbour(current_vertex, C[i]).weight });
         }
     }
 
+    delete[] processed;
     return solution;
 }

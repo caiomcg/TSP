@@ -2,6 +2,7 @@
 
 #include "reader/reader-factory/reader-factory.h"
 #include "heuristics/construction/greedy/greedy.h"
+#include "heuristics/construction/best-insertion/best-insertion.h"
 
 void showMatrix(const unsigned* matrix, const int& dimension) {
     for (int i = 0; i < dimension; i++) {
@@ -37,8 +38,8 @@ int main(int argc, char** argv) {
         reader->getAdjacencyList()->show();
 #endif
     
-        auto greedy = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
-        int* solution = greedy.getSolution(0);
+        auto construction_heuristic = BestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        int* solution = construction_heuristic.getSolution(0);
 
         std::clog << "Evaluation: " << evaluation(reader->getAdjacencyMatrix(), solution, reader->getAdjacencyMatrixSize()) << std::endl;
 

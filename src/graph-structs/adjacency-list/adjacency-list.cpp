@@ -31,8 +31,12 @@ void AdjacencyList::show() const {
     }
 }
 
-int AdjacencyList::getWeight(const unsigned& origin, const unsigned& destination) {
-    return this->list_[origin][destination - 1].weight;
+neighbour AdjacencyList::getNeighbour(const unsigned& origin, const unsigned& destination) {
+    return this->list_[origin][destination - 1];
+}
+
+unsigned AdjacencyList::getNeighbourSize(const unsigned& origin) {
+    return this->list_[origin].size();
 }
 
 unsigned AdjacencyList::getVertices() const {
