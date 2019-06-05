@@ -1,7 +1,7 @@
 #include "adjacency-list.h"
 
 AdjacencyList::AdjacencyList(const unsigned& size) : root_size_(size), vertices_(0) {
-    this->list_ = new std::vector<t_neighbour>[size];
+    this->list_ = new std::vector<neighbour>[size];
 }
 
 void AdjacencyList::addNeighbour(const unsigned& origin, const unsigned& destination, const int& weight) {
@@ -29,6 +29,10 @@ void AdjacencyList::show() const {
         }
         std::cout << std::endl;
     }
+}
+
+int AdjacencyList::getWeight(const unsigned& origin, const unsigned& destination) {
+    return this->list_[origin][destination - 1].weight;
 }
 
 unsigned AdjacencyList::getVertices() const {

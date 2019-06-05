@@ -3,14 +3,28 @@
 
 #include <vector>
 
-typedef struct {
+struct neighbour {
     unsigned vertice;
     int weight;
-} t_neighbour;
+
+    inline bool operator > (const neighbour& rhs) {
+        return this->weight > rhs.weight; 
+    }
+};
+
+inline bool operator >(const neighbour &lhs, const neighbour &rhs)
+{
+    return lhs.weight > rhs.weight; 
+}
+
+inline bool operator <(const neighbour &lhs, const neighbour &rhs)
+{
+    return lhs.weight < rhs.weight; 
+}
 
 class AdjacencyList final {
 private:
-    std::vector<t_neighbour>* list_;
+    std::vector<neighbour>* list_;
     unsigned root_size_;
     unsigned vertices_;
 public:
@@ -21,6 +35,7 @@ public:
 
     void show() const;
 
+    int getWeight(const unsigned& origin, const unsigned& destination);
     unsigned getVertices() const;
 };
 

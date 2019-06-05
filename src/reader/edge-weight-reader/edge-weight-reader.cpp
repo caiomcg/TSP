@@ -20,15 +20,11 @@ void EdgeWeightReader::process() {
     this->fetchDimension(this->file_stream_);
     if (this->dimension_ == -1) throw std::runtime_error("invalid entry dimension");
 
-    std::clog << "allocate" << std::endl;
-
     if (!this->allocateAdjacencyMatrixWith(this->dimension_ * this->dimension_)) {
         throw std::runtime_error("could not allocate the memory space");
     }
 
-    this->adjacency_list_ = new AdjacencyList{this->dimension_};
-
-     std::clog << "allocated" << std::endl;
+    this->adjacency_list_ = new AdjacencyList{(unsigned)this->dimension_};
 
     for (int i = 0; i < this->dimension_; i++) {
         for (int j = 0; j < this->dimension_; j++) {

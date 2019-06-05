@@ -39,7 +39,7 @@ void DisplayDataReader::process() {
         throw std::runtime_error("could not allocate the memory space");
     }
 
-    this->adjacency_list_ = new AdjacencyList{this->dimension_};
+    this->adjacency_list_ = new AdjacencyList{(unsigned)this->dimension_};
 
     std::string line;
     std::smatch matches;
