@@ -7,14 +7,15 @@ Swap::Swap(unsigned* adjacency_matrix, const unsigned& size) : Movement(adjacenc
 Swap::~Swap() {}
 
 int Swap::getNewMovement(int* solution, int evaluation) {
+    std::clog << "Performing Swap" << std::endl;
     int new_evaluation = 0;
     bool improved = true;
 
     while (improved) {
         improved = false;
 
-        for (unsigned i = 0; i < size_; ++i) {
-            for (unsigned j = 0; j < size_; ++j) {
+        for (unsigned i = 1; i < size_; i++) {
+            for (unsigned j = 1; j < size_; j++) {
                 if ( i == j )
                     continue;
 

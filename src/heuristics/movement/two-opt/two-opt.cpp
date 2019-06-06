@@ -32,6 +32,7 @@ int* TwoOpt::swap(int* solution, const int& i, const int& k, const unsigned& siz
 }
 
 int TwoOpt::getNewMovement(int* solution, int evaluation) {
+    std::clog << "Performing TwoOpt" << std::endl;
     bool improved = true;
 
     while (improved) {

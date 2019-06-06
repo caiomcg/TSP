@@ -5,6 +5,7 @@
 #include "heuristics/construction/nearest-insertion/nearest-insertion.h"
 #include "heuristics/movement/two-opt/two-opt.h"
 #include "heuristics/movement/swap/swap.h"
+#include "heuristics/movement/vnd/vnd.h"
 
 void showMatrix(const unsigned* matrix, const int& dimension) {
     for (int i = 0; i < dimension; i++) {
@@ -36,8 +37,8 @@ int main(int argc, char** argv) {
         reader->process();
 
 #ifdef DEBUG
-        showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
-        reader->getAdjacencyList()->show();
+        // showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        // reader->getAdjacencyList()->show();
 #endif
         auto construction_heuristic = NearestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
         // auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
@@ -54,7 +55,9 @@ int main(int argc, char** argv) {
 
         std::clog << "-----------------------------------------------------------------------------" << std::endl;
 
-        auto movement_heuristic = TwoOpt(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        auto movement_heuristic = VND(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+
+        // auto movement_heuristic = TwoOpt(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
         // auto movement_heuristic = Swap(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
         auto new_eval = movement_heuristic.getNewMovement(solution, construction_evaluation);
         std::clog << "New Evaluation: " << new_eval << std::endl;
@@ -64,7 +67,7 @@ int main(int argc, char** argv) {
             std::clog << solution[i] << " ";
         std::clog << std::endl;
 
-        delete[] solution;
+        delete solution;
     } catch (const std::exception& e) {
         std::clog << "Failed - what(): " << e.what() << std::endl;
         return 1;
