@@ -7,10 +7,10 @@
 
 #include "../../../graph-structs/adjacency-list/adjacency-list.h"
 
-class BestInsertion final : public Construction {
+class NearestInsertion final : public Construction {
 public:
-    BestInsertion(unsigned* adjacency_matrix, const int& matrix_size, AdjacencyList* adjacency_list);
-    ~BestInsertion();
+    NearestInsertion(unsigned* adjacency_matrix, const int& matrix_size, AdjacencyList* adjacency_list);
+    ~NearestInsertion();
 
     int* getSolution(const unsigned& origin) override;
 };

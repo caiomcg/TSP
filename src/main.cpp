@@ -2,7 +2,7 @@
 
 #include "reader/reader-factory/reader-factory.h"
 #include "heuristics/construction/greedy/greedy.h"
-#include "heuristics/construction/best-insertion/best-insertion.h"
+#include "heuristics/construction/nearest-insertion/nearest-insertion.h"
 #include "heuristics/movement/two-opt/two-opt.h"
 
 void showMatrix(const unsigned* matrix, const int& dimension) {
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
         showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
         reader->getAdjacencyList()->show();
 #endif
-        auto construction_heuristic = BestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        auto construction_heuristic = NearestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
         // auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
         int* solution = construction_heuristic.getSolution(0);
 

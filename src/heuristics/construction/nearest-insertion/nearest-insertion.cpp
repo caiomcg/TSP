@@ -1,16 +1,16 @@
-#include "best-insertion.h"
+#include "nearest-insertion.h"
 
 #include <limits>
 #include <algorithm>
 
-BestInsertion::BestInsertion(unsigned* adjacency_matrix, const int& matrix_size, AdjacencyList* adjacency_list)
+NearestInsertion::NearestInsertion(unsigned* adjacency_matrix, const int& matrix_size, AdjacencyList* adjacency_list)
     : Construction(adjacency_matrix, matrix_size, adjacency_list) {}
 
-BestInsertion::~BestInsertion() {}
+NearestInsertion::~NearestInsertion() {}
 
 #include <iostream>
 
-int* BestInsertion::getSolution(const unsigned& origin) {
+int* NearestInsertion::getSolution(const unsigned& origin) {
     int* solution = new int[matrix_size_]();
     bool* processed = new bool[matrix_size_]();
 
