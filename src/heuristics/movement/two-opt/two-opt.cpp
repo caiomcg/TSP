@@ -11,16 +11,19 @@ TwoOpt::~TwoOpt() {}
 int* TwoOpt::swap(int* solution, const int& i, const int& k, const unsigned& size) {
     int* new_solution = new int[size]();
 
+    // Copy the first part up to the first index
     for (int c = 0; c <= i - 1; c++) {
         new_solution[c] = solution[c];
     }
 
+    // Invert the middle
     int inverter = 0;
     for (int c = i; c <= k; c++) {
         new_solution[c] = solution[k - inverter];
         inverter++;
     }
 
+    // Copy the remaining nodes from k on
     for (int j = k + 1; j < size; j++) {
         new_solution[j] = solution[j];
     }
@@ -39,6 +42,12 @@ int TwoOpt::getNewMovement(int* solution, int evaluation) {
                 // std::clog << "[" << solution[j] << "][" << solution[j + 1] << "] " << adjacency_matrix_[solution[j] * size_ + solution[(j + 1)]] << std::endl;
                 // std::clog << "[" << solution[i] << "][" << solution[j + 1] << "] " << adjacency_matrix_[solution[i] * size_ + solution[(j + 1)]] << std::endl;
                 // std::clog << "[" << solution[j] << "][" << solution[i - 1] << "] " << adjacency_matrix_[solution[j] * size_ + solution[(i - 1)]] << std::endl;
+                
+                // Compares if the two vertices that will be cut are better than the ones that 
+                // will now be used. If the new one is better construct a new solution array
+                // and check if the evaluation is better
+
+                // TODO: DO NOT REALLOC FOR EVERY NEW SET
                 if (adjacency_matrix_[solution[i] * size_ + solution[(i - 1)]] + adjacency_matrix_[solution[j] * size_ + solution[(j + 1)]] >= 
                     adjacency_matrix_[solution[i] * size_ + solution[(j + 1)]] + adjacency_matrix_[solution[j] * size_ + solution[(i - 1)]]) {
                     

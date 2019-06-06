@@ -38,8 +38,8 @@ int main(int argc, char** argv) {
         showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
         reader->getAdjacencyList()->show();
 #endif
-
-        auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        auto construction_heuristic = BestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        // auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
         int* solution = construction_heuristic.getSolution(0);
 
         const int construction_evaluation = evaluation(reader->getAdjacencyMatrix(), solution, reader->getAdjacencyMatrixSize());
