@@ -1,5 +1,5 @@
-#ifndef HEURISTICS_MOVEMENT_TWO_OPT_H
-#define HEURISTICS_MOVEMENT_TWO_OPT_H
+#ifndef HEURISTICS_MOVEMENT_SWAP_H
+#define HEURISTICS_MOVEMENT_SWAP_H
 
 #include "../movement.h"
 
@@ -11,4 +11,4 @@ public:
     int getNewMovement(int* solution, int evaluation) override;
 };
 
-#endif // define HEURISTICS_MOVEMENT_TWO_OPT_H
+#endif // define HEURISTICS_MOVEMENT_SWAP_H

@@ -24,7 +24,7 @@ int* TwoOpt::swap(int* solution, const int& i, const int& k, const unsigned& siz
     }
 
     // Copy the remaining nodes from k on
-    for (int j = k + 1; j < size; j++) {
+    for (unsigned j = k + 1; j < size; j++) {
         new_solution[j] = solution[j];
     }
 
@@ -36,8 +36,8 @@ int TwoOpt::getNewMovement(int* solution, int evaluation) {
 
     while (improved) {
         improved = false;
-        for (int i = 1; i < size_ - 2; i++) {
-            for (int j = i + 1; j < size_ - 1; j++) {
+        for (unsigned i = 1; i < size_ - 2; i++) {
+            for (unsigned j = i + 1; j < size_ - 1; j++) {
                 // std::clog << "[" << solution[i] << "][" << solution[i - 1] << "] " << adjacency_matrix_[solution[i] * size_ + solution[(i - 1)]] <<  std::endl;
                 // std::clog << "[" << solution[j] << "][" << solution[j + 1] << "] " << adjacency_matrix_[solution[j] * size_ + solution[(j + 1)]] << std::endl;
                 // std::clog << "[" << solution[i] << "][" << solution[j + 1] << "] " << adjacency_matrix_[solution[i] * size_ + solution[(j + 1)]] << std::endl;
@@ -68,10 +68,10 @@ int TwoOpt::getNewMovement(int* solution, int evaluation) {
         }
     }
 
-    std::clog << "New Sequence: ";
-    for (int k = 0; k < size_; k++)
-        std::clog << solution[k] << " ";
-    std::clog << std::endl;
+    // std::clog << "New Sequence: ";
+    // for (int k = 0; k < size_; k++)
+    //     std::clog << solution[k] << " ";
+    // std::clog << std::endl;
 
     return evaluation;
 }

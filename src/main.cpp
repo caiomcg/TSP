@@ -4,6 +4,7 @@
 #include "heuristics/construction/greedy/greedy.h"
 #include "heuristics/construction/nearest-insertion/nearest-insertion.h"
 #include "heuristics/movement/two-opt/two-opt.h"
+#include "heuristics/movement/swap/swap.h"
 
 void showMatrix(const unsigned* matrix, const int& dimension) {
     for (int i = 0; i < dimension; i++) {
@@ -54,8 +55,14 @@ int main(int argc, char** argv) {
         std::clog << "-----------------------------------------------------------------------------" << std::endl;
 
         auto movement_heuristic = TwoOpt(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        // auto movement_heuristic = Swap(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
         auto new_eval = movement_heuristic.getNewMovement(solution, construction_evaluation);
         std::clog << "New Evaluation: " << new_eval << std::endl;
+
+        std::clog << "New Sequence: ";
+        for (int i = 0; i < reader->getAdjacencyMatrixSize(); i++)
+            std::clog << solution[i] << " ";
+        std::clog << std::endl;
 
         delete[] solution;
     } catch (const std::exception& e) {
