@@ -17,6 +17,10 @@ int VND::getNewMovement(int* solution, int evaluation) {
     int new_evaluation = 0;
 
     while (count < 2) {
+        std::clog << "VND will use: ";
+        for (int i = 0; i < this->size_; i++)
+            std::clog << solution[i] << " ";
+        std::clog << std::endl;
         new_evaluation = movements[count]->getNewMovement(solution, evaluation);
 
         if (new_evaluation < evaluation) {

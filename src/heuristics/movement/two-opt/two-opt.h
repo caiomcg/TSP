@@ -6,6 +6,7 @@
 class TwoOpt final : public Movement {
 protected:
     int* swap(int* solution, const int& i, const int& k, const unsigned& size);
+    int partialEvaluation(int* solution, const int& i, const int& k, const unsigned& size);
 public:
     TwoOpt(unsigned* adjacency_matrix, const unsigned& size);
     ~TwoOpt();

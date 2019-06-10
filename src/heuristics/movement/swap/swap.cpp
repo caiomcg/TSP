@@ -11,6 +11,11 @@ int Swap::getNewMovement(int* solution, int evaluation) {
     int new_evaluation = 0;
     bool improved = true;
 
+    std::clog << "Pre swap: ";
+        for (int i = 0; i < this->size_; i++)
+            std::clog << solution[i] << " ";
+        std::clog << std::endl;
+
     while (improved) {
         improved = false;
 
@@ -32,6 +37,11 @@ int Swap::getNewMovement(int* solution, int evaluation) {
             }
         }
     }
+
+    std::clog << "Post swap: ";
+        for (int i = 0; i < this->size_; i++)
+            std::clog << solution[i] << " ";
+        std::clog << std::endl;
 
     return evaluation;
 }
