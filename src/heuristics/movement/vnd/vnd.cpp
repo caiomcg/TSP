@@ -20,11 +20,11 @@ int VND::getNewMovement(int* solution, int evaluation) {
         new_evaluation = movements[count]->getNewMovement(solution, evaluation);
 
         if (new_evaluation < evaluation) {
-            // std::clog << "New Sequence: ";
-            // for (unsigned i = 0; i < size_; i++)
-            //     std::clog << solution[i] << " ";
-            // std::clog << std::endl;
             evaluation = new_evaluation,
+            // std::clog << "New Sequence>>>: ";
+            // for (unsigned i = 0; i < size_; i++)
+            //     std::clog << solution[i] << "(" << i << ") ";
+            // std::clog << std::endl;
             count = 0;
         } else {
             count++;

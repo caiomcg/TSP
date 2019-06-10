@@ -51,25 +51,35 @@ int TwoOpt::getNewMovement(int* solution, int evaluation) {
                 // TODO: DO NOT REALLOC FOR EVERY NEW SET
                 if (adjacency_matrix_[solution[i] * size_ + solution[(i - 1)]] + adjacency_matrix_[solution[j] * size_ + solution[(j + 1)]] >= 
                     adjacency_matrix_[solution[i] * size_ + solution[(j + 1)]] + adjacency_matrix_[solution[j] * size_ + solution[(i - 1)]]) {
+                // std::clog << "NEW SOLUTION: ";
+                // for (int k = 0; k < size_; k++)
+                //     std::clog << solution[k] << " ";
+                // std::clog << std::endl;
                     
+
                     int* new_solution = swap(solution, i, j, size_);
+                    
 
                     int new_evaluation = this->evaluation(adjacency_matrix_, new_solution, size_);
            
                     if (new_evaluation < evaluation) {
-                        delete[] solution;
-                        solution = new_solution;
-                        new_solution = nullptr;
+                        memcpy(solution, new_solution, size_);
+
+                        // std::clog << "New Sequence: ";
+                        // for (int k = 0; k < size_; k++)
+                        //     std::clog << solution[k] << " ";
+                        // std::clog << std::endl;
 
                         evaluation = new_evaluation;
                         improved = true;
                     }
+                    delete[] new_solution;
                 }
             }
         }
     }
 
-    // std::clog << "New Sequence: ";
+    // std::clog << "New Sequence!!!!!: ";
     // for (int k = 0; k < size_; k++)
     //     std::clog << solution[k] << " ";
     // std::clog << std::endl;
