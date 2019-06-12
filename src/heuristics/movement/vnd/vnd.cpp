@@ -9,7 +9,7 @@ VND::VND(unsigned* adjacency_matrix, const unsigned& size) : Movement(adjacency_
 VND::~VND() {}
 
 int VND::getNewMovement(int* solution, int evaluation) {
-    std::clog << "Performing VND" << std::endl;
+    // std::clog << "Performing VND" << std::endl;
 
     Movement* movements[2] = {new Swap(adjacency_matrix_, size_), new TwoOpt(adjacency_matrix_, size_)};
     unsigned count = 0;

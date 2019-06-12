@@ -7,7 +7,7 @@ Swap::Swap(unsigned* adjacency_matrix, const unsigned& size) : Movement(adjacenc
 Swap::~Swap() {}
 
 int Swap::getNewMovement(int* solution, int evaluation) {
-    std::clog << "Performing Swap" << std::endl;
+    // std::clog << "Performing Swap" << std::endl;
     int new_evaluation = 0;
     bool improved = true;
 

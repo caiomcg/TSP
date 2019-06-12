@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include "reader/reader-factory/reader-factory.h"
 #include "heuristics/construction/greedy/greedy.h"
@@ -28,6 +29,44 @@ int evaluation(const unsigned* adjacency_matrix, const int *solution, const int&
     return sum;
 }
 
+void getGraspSolution(std::shared_ptr<Reader> reader) {
+    for (int i = 0; i < 15; i++) {
+        auto start = std::chrono::steady_clock::now();
+
+        int solution[reader->getAdjacencyMatrixSize()];
+        Grasp grasp(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        
+        std::clog << grasp.analyse(20, 0.8f, solution) << " " << std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count() << std::endl;
+    }
+}
+
+void getGreedyVNDSolution(std::shared_ptr<Reader> reader) {
+    for (int i = 0; i < 15; i++) {
+        auto start = std::chrono::steady_clock::now();
+
+        auto construction_heuristic = Greedy(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        int* solution = construction_heuristic.getSolution(0);
+
+        auto movement_heuristic = VND(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        std::clog << movement_heuristic.getNewMovement(solution, evaluation(reader->getAdjacencyMatrix(), solution, reader->getAdjacencyMatrixSize())) << " " << std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count() << std::endl;
+        delete[] solution;
+    }
+}
+
+void nearestVNDSolution(std::shared_ptr<Reader> reader) {
+    for (int i = 0; i < 15; i++) {
+        auto start = std::chrono::steady_clock::now();
+
+        auto construction_heuristic = NearestInsertion(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
+        int* solution = construction_heuristic.getSolution(0);
+
+        auto movement_heuristic = VND(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
+        std::clog << movement_heuristic.getNewMovement(solution, evaluation(reader->getAdjacencyMatrix(), solution, reader->getAdjacencyMatrixSize())) << " " << std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - start).count() << std::endl;
+        delete[] solution;
+    }
+}
+
+
 int main(int argc, char** argv) {
     (void) argc; // unused parameter
 
@@ -36,6 +75,8 @@ int main(int argc, char** argv) {
         
         reader->prepare();
         reader->process();
+
+        std::shared_ptr<Reader> shared = std::move(reader);
 
 #ifdef DEBUG
         // showMatrix(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize());
@@ -70,10 +111,12 @@ int main(int argc, char** argv) {
 
         // delete solution;
 
-
-        int solution[reader->getAdjacencyMatrixSize()];
-        Grasp grasp(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
-        std::clog << grasp.analyse(1, 0.5f, solution) << std::endl;
+        std::clog << "GRASP--------" << std::endl;
+        getGraspSolution(shared);
+        std::clog << "GREEDY--------" << std::endl;
+        getGreedyVNDSolution(shared);
+        std::clog << "NEAREST--------" << std::endl;
+        nearestVNDSolution(shared);
 
     } catch (const std::exception& e) {
         std::clog << "Failed - what(): " << e.what() << std::endl;
