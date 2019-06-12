@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
 
         int solution[reader->getAdjacencyMatrixSize()];
         Grasp grasp(reader->getAdjacencyMatrix(), reader->getAdjacencyMatrixSize(), reader->getAdjacencyList());
-        std::clog << grasp.analyse( 1, 0.5, solution) << std::endl;
+        std::clog << grasp.analyse(1, 0.5f, solution) << std::endl;
 
     } catch (const std::exception& e) {
         std::clog << "Failed - what(): " << e.what() << std::endl;

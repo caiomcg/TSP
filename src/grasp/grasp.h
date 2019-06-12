@@ -15,7 +15,7 @@ private:
 public:
     Grasp(unsigned* adjacency_matrix, const int& matrix_size, AdjacencyList* adjacency_list);
     
-    int construction(const int& origin, int *solution, const float& alpha);
+    void construction(const int& origin, int *solution, const float& alpha);
     int analyse(const int& iterations, const float& alpha, int* solution);
 };
 
