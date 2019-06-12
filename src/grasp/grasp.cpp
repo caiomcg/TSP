@@ -86,7 +86,7 @@ int Grasp::analyse(const int& iterations, const float& alpha, int* solution) {
 
     for (int i = 0; i < iterations; i++) {
 
-        this->construction(alpha, solution, alpha);
+        this->construction(0, solution, alpha);
 
         // std::clog << "Constructed: ";
         // for (int i = 0; i < matrix_size_; i++)
